@@ -1,0 +1,33 @@
+import { type IAgentRuntime, type Provider, type ICacheManager } from "@elizaos/core";
+import type { Address, WalletClient, PublicClient, Chain, HttpTransport, Account, PrivateKeyAccount } from "viem";
+import type { SupportedChain } from "../types/index.ts";
+export declare class WalletProvider {
+    private cacheManager;
+    private cache;
+    private cacheKey;
+    private currentChain;
+    private CACHE_EXPIRY_SEC;
+    chains: Record<string, Chain>;
+    account: PrivateKeyAccount;
+    constructor(accountOrPrivateKey: PrivateKeyAccount | `0x${string}`, cacheManager: ICacheManager, chains?: Record<string, Chain>);
+    getAddress(): Address;
+    getCurrentChain(): Chain;
+    getPublicClient(chainName: SupportedChain): PublicClient<HttpTransport, Chain, Account | undefined>;
+    getWalletClient(chainName: SupportedChain): WalletClient;
+    getChainConfigs(chainName: SupportedChain): Chain;
+    getWalletBalance(): Promise<string | null>;
+    getWalletBalanceForChain(chainName: SupportedChain): Promise<string | null>;
+    addChain(chain: Record<string, Chain>): void;
+    switchChain(chainName: SupportedChain, customRpcUrl?: string): void;
+    private readFromCache;
+    private writeToCache;
+    private getCachedData;
+    private setCachedData;
+    private setAccount;
+    private setChains;
+    private setCurrentChain;
+    private createHttpTransport;
+    static genChainFromName(chainName: string, customRpcUrl?: string | null): Chain;
+}
+export declare const initWalletProvider: (runtime: IAgentRuntime) => Promise<WalletProvider>;
+export declare const evmWalletProvider: Provider;
