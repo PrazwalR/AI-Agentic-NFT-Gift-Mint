@@ -149,19 +149,3 @@ const { data } = await supabase.from('gifts').select('gift_name').eq('gift_code'
 * **RPC / chain issues**: Switch providers or test on another testnet if RPC is unreliable.
 * **Secrets leak**: Rotate keys immediately and audit logs.
 
----
-
-## Contributing & license
-
-* Open issues and PRs. Keep secrets out of PRs and run tests locally.
-* Add a `LICENSE` file (MIT recommended for permissive use).
-
----
-
-If you'd like, I can:
-
-* export this README as a downloadable `README.md` file in the repo,
-* append the Chainlink Functions JavaScript example and a `getgift.sol` contract snippet,
-* or produce a minimal frontend CLI script that demonstrates the agent-to-contract flow.
-
-Tell me which of those you'd like next.
